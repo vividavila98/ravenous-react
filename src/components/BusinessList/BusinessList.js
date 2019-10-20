@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import 'BusinessList.css';
-import Business from '../Business';
+import './BusinessList.css';
+import Business from '../Business/Business.js';
 
 class BusinessList extends Component {
   render() {
     return (
         <div className='Business-List'>
-            <Bussiness />
-            <Bussiness />
-            <Bussiness />
-            <Bussiness />
-            <Bussiness />
-            <Bussiness />
+            <Business />
+            <Business />
+            <Business />
+            <Business />
+            <Business />
+            <Business />
         </div>
     )
   }
