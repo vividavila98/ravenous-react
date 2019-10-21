@@ -7,8 +7,8 @@ class BusinessList extends Component {
     return (
         <div className='Business-List'>
             {
-              this.props.businesses.map(business = () => {
-                return <Business business={business} />;
+              this.props.businesses.map(business => {
+                return <Business business={business}/>;
               })
               }
         </div>
