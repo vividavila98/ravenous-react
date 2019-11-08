@@ -8,6 +8,10 @@ class Business extends Component {
             <div className='image-container'>
                 <img src='https://s3.amazonaws.com/codecademy-content/programs/react/ravenous/pizza.jpg' alt=''/>
             </div>
+            {/**
+             * Business component received the props business which is a specific business
+             * now the info for the business is dynamic and is referenced through the prop
+             */}
             <h2>{this.props.business.name}</h2>
             <div className='Business-information'>
                 <div className='Business-address'>
