@@ -4,9 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Following a Codecademy tutorial, I created a React app that uses the Yelp API to search for businesses.
 
-### Part One: Creating Static Components
 Components:
-1. `<Business />
-2. `<BusinessList />`
-3. `<SearchBar />`
+1. `<Business />` - represents how a restaurant will be formatted & styled
+2. `<BusinessList />` - simulates what a returned list of businesses would like in Ravenous after querying the Yelp API
+3. `<SearchBar />` - will communicate with the Yelp API
 4. `<App />`
