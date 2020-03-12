@@ -10,6 +10,30 @@ const custom_header = {
 // request to retrieve businesses: GET https://api.yelp.com/v3/businesses/search
 //search?term=term&location=location&sort_by=SortBy
 async function search(term, location, sortBy) {
-    let res = await Axios.get(`https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, custom_header);
-    return res;
+    try {
+        let res = await Axios.get(`https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, custom_header);
+        let data = res.data;
+        if(data.businesses) {
+            // return an array that has all of the business properties
+            // we need: name, address, city, etc. 
+            return data.businesses.map(business => {
+                return {
+                    id: business.id,
+                    imageSrc: business.image_url,
+                    name: business.name,
+                    address: business.location,display_address,
+                    city: business.location,city,
+                    state: business.location.state,
+                    zipCode: business.location.zip_code,
+                    category: business.categories.title,
+                    rating: business.rating,
+                    reviewCount: business.review_count,
+                };
+            });
+        }
+    } catch(error) {
+        console.error(error);
+    }
 };
+
+export default Yelp;
