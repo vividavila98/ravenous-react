@@ -35,6 +35,7 @@ class SearchBar extends Component {
   // sets the state of sortBy to the parameter sortByOption
   handleSortByChange = (sortByOption) => {
     this.setState({sortBy: sortByOption});
+    console.log(`sorted by ${this.state.sortBy}`);
   }
 
   // this is going to be triggered when something is typed into business text field
