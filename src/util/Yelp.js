@@ -25,7 +25,7 @@ export async function search(term, location, sortBy) {
                     id: business.id,
                     image: business.image_url,
                     name: business.name,
-                    address: business.location.display_address,
+                    address: business.location.address1,
                     city: business.location.city,
                     state: business.location.state,
                     zipCode: business.location.zip_code,

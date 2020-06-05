@@ -1,0 +1,2 @@
+export const GOOGLE_API_KEY = 'AIzaSyCr7CPhZ9gobHwu6iCTUPFnBWGIU1p0LdI';
+export const YELP_API_KEY = '5D0xWJ2XUi9J-tgEdxIPl68_HlgNFIoA5bgb-8Lpcy-a7hVDO0nLo7-TgOFcM9t9T6MDzOnO2xX4ry-dhacnRfLLsIZsWNRuJqz1RJ_s0SvoAhV6ojCj19Jm2qpqXnYx';

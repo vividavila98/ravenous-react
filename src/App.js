@@ -1,35 +1,27 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import BusinessList from './components/BusinessList/BusinessList.js';
 import SearchBar from './components/SearchBar/SearchBar.js';
-import {Yelp, search} from './util/Yelp.js';
+import { search } from './util/Yelp.js';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { businesses: [] };
-  }
-
+export default function App () {
+  const [businesses, setBusinesses] = useState([]);
 
   // simulates what a search might look like once the 
   //button Lets Go is clicked
-  searchYelp = (term, location, sortBy) => {
+  const searchYelp = (term, location, sortBy) => {
     search(term, location, sortBy)
     .then(businesses => {
-      this.setState({businesses: businesses});
+      setBusinesses(businesses);
     });
   }
 
-  render() {
     return (
       <div className='App'>
         <h1>Ravenous</h1>
-        <SearchBar searchYelp={this.searchYelp}/>
+        <SearchBar searchYelp={searchYelp}/>
         {/* BusinessList is inhering the bussiness array/list to use */}
-        <BusinessList businesses={this.state.businesses}/>
+        <BusinessList businesses={businesses}/>
       </div>
-    );
-  }
+    ); 
 }
-
-export default App;
