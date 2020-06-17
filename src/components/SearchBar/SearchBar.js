@@ -1,18 +1,69 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
+import BusinessList from '../BusinessList/BusinessList.js';
+import PlacesAutocomplete from 'react-places-autocomplete';
+import Axios from "axios";
+import {YELP_API_KEY} from '../../constants';
 
-export default function SearchBar(props) {
-  const { searchYelp } = props;
+
+export default function SearchBar() {
   const [term, setTerm] = useState(''); // business term searched
   const [location, setLocation] = useState(''); // location searched
-  const [sortBy, setSortBy] = useState('best_match'); // default search is best_match
+  const [sortBy, setSortBy] = useState('best_match'); // how to sory results
+  const [search, setSearch] = useState(false); // when to make api call 
+  const [businesses, setBusinesses] = useState([]);
+  
+  // KEYS are string text to display and VALUE is for the API
+  const sortByOptions = {
+    'Best Match': 'best_match',
+    'Highest Rated': 'rating',
+    'Most Reviewed': 'review_count'
+  };
 
-    // KEYS are string text to display and VALUE is for the API
-    const sortByOptions = {
-      'Best Match': 'best_match',
-      'Highest Rated': 'rating',
-      'Most Reviewed': 'review_count'
-    };
+  const options = {
+    headers: { 
+        Authorization: `Bearer ${YELP_API_KEY}`
+
+    }
+}
+
+const autocompleteTerm = async () => {
+  try {
+    let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
+  }
+}
+
+const searchBusinesses = async () => {
+  try {
+    let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, options);
+    let data = res.data;
+    if(data.businesses) {
+        // return an array that has all of the business properties
+        // we need: name, address, city, etc. 
+        const newArr = data.businesses.map(business => {
+            return {
+                id: business.id,
+                image: business.image_url,
+                name: business.name,
+                address: business.location.address1,
+                city: business.location.city,
+                state: business.location.state,
+                zipCode: business.location.zip_code,
+                category: business.categories.title,
+                rating: business.rating,
+                reviewCount: business.review_count,
+            };
+        });
+        setBusinesses(newArr);
+    }
+} catch(error) {
+    console.error(error);
+  }
+}
+
+  useEffect(() => {
+    searchBusinesses();
+  }, [search]);
 
   // returns the current CSS class for a sorting option: either it's active
   // or it's nothing. 
@@ -40,14 +91,16 @@ export default function SearchBar(props) {
   }
 
   // same logic as handleTermChange
-  const handleLocationChange = e => {
-    setLocation(e.target.value);
+  const handleLocationChange = location => {
+    setLocation(location);
   }
 
   // triggered when Lets Go button is clicked
   const handleSearch = e => {
-    searchYelp(term, location, sortBy);
+    //searchYelp(term, location, sortBy);
+    setSearch(!search);
     e.preventDefault();
+
   }
 
   /**
@@ -74,6 +127,7 @@ export default function SearchBar(props) {
 
   return (
       <div className='SearchBar'>
+        <h1>What's Here?</h1>
         {/* 
         the three buttons: best match, highest rated, most reviewed
          as a list
@@ -84,12 +138,50 @@ export default function SearchBar(props) {
           </ul>
         </div>
         <div className='SearchBar-fields'>
-          <input placeholder='Search Businesses' onChange={handleTermChange}/>
-          <input placeholder='Where?' onChange={handleLocationChange}/>
+          <input placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
+          <PlacesAutocomplete
+            onChange={handleLocationChange}
+            value={location}
+          >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <input
+              {...getInputProps({
+                placeholder: 'Where?',
+                className: 'location-search-input',
+              })}
+            />
+            <div className="autocomplete-dropdown-container">
+              {loading && <div>Loading...</div>}
+              {suggestions.map(suggestion => {
+                const className = suggestion.active
+                  ? 'suggestion-item--active'
+                  : 'suggestion-item';
+                  
+                const style = suggestion.active
+                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                return (
+                  <div
+                    {...getSuggestionItemProps(suggestion, {
+                      className,
+                      style,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
         </div>
         <div className='SearchBar-submit'>
           <a href='#' onClick={handleSearch}>Let's Go</a>
         </div>
+        {/* BusinessList is inhering the bussiness array/list to use */}
+        <BusinessList businesses={businesses}/>
       </div>
     )
 }
