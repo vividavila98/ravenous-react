@@ -27,11 +27,17 @@ export default function SearchBar() {
     }
 }
 
-const autocompleteTerm = async () => {
+/*const autocompleteTerm = async () => {
   try {
     let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
+    let data = res.data;
+    if (data.terms) {
+
+    }
+  } catch(error) {
+    console.error(error);
   }
-}
+}*/
 
 const searchBusinesses = async () => {
   try {
@@ -52,6 +58,10 @@ const searchBusinesses = async () => {
                 category: business.categories.title,
                 rating: business.rating,
                 reviewCount: business.review_count,
+                website: business.url,
+                phone: business.display_phone,
+                photos: business.photos
+
             };
         });
         setBusinesses(newArr);

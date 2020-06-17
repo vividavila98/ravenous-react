@@ -5,6 +5,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 35rem;
+    border-bottom-left-radius: 36px;
+    border-bottom-right-radius: 36px;
   }
   
   .SearchBar-sort-options ul {
@@ -16,7 +18,7 @@
   
   .SearchBar-sort-options li {
     cursor: pointer;
-    width: 4.33rem;
+    width: 10.33rem;
     border-bottom: 1px solid #c27395;
     padding: 0 2.58rem .33rem 2.58rem;
     line-height: 1.13;
@@ -28,7 +30,7 @@
   }
 
   .search-business {
-    height: 18px;
+    height: 47px;
   }
 
   .SearchBar-sort-options li:hover {
@@ -96,6 +98,8 @@
   .SearchBar-submit a:hover {
     cursor: pointer;
     background-color: #915089;
+    color: white;
+    text-decoration: none;
   }
   
 

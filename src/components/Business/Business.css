@@ -4,22 +4,38 @@
     justify-content: space-between;
     width: 16.66rem;
     margin: 0 .5rem 2.3rem .5rem;
+    border: 1px solid #dedede;
+    border-radius: 5px;
   }
   
-  .Business .image-container {
+  .Business .image-container, .image-container {
     height: 16.66rem;
-    margin-bottom: 1rem;
+    margin: .5px .5px 1rem .5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
   
   .Business h2 {
     margin-bottom: .5rem;
     font-size: 1.2rem;
     font-weight: 600;
+    padding-left: 20px;
+    color: #3C1E60;
+  }
+
+  button.learn-more.btn.btn-secondary {
+    background-color: #7F4378;
+  }
+
+  button.learn-more.btn.btn-secondary:hover {
+    background-color: #915089;
   }
   
   .Business-information {
     display: flex;
     justify-content: space-between;
+    padding-left: 20px;
+    padding-bottom: 20px;
   }
   
   .Business-information p {
@@ -38,11 +54,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: right;
+    margin-top: 5px;
   }
   
   .Business-reviews h3 {
-    color: #CCA353;
+    color: #E095B6;
     font-weight: 600;
   }
   
