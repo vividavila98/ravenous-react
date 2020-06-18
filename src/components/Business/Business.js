@@ -32,10 +32,11 @@ export default function Business(props) {
         <div className='image-container'>
             <img src={business.image} alt='restaurant'/>
         </div>
-        <p>{business.display_phone}</p>
+        <p className='mb-0'><b>Phone number:</b></p>
+        <p>{business.phone}</p>
         </ModalBody>
         <ModalFooter>
-              <Button color="primary">Website</Button>{' '}
+            <a href={business.website} target='_blank' className='yelp-button'>Yelp Info</a>
         </ModalFooter>
       </Modal>
     </div>
