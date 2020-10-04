@@ -3,10 +3,10 @@ import './BusinessList.css';
 import Business from '../Business/Business.js';
 
 export default function BusinessList(props) {
-  const {businesses} = props; 
+  const {businesses, myRef} = props; 
 
   return (
-    <div className='Business-List'>
+    <div className='Business-List' ref={myRef}>
       {/**
       * BusinessList received the array/list of businesses from
       * App.js. Now it needs to display the list of businesses.

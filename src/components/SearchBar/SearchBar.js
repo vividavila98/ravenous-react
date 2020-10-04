@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './SearchBar.css';
 import BusinessList from '../BusinessList/BusinessList.js';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import Axios from "axios";
 import {YELP_API_KEY} from '../../constants';
+
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 
 export default function SearchBar() {
@@ -12,6 +14,8 @@ export default function SearchBar() {
   const [sortBy, setSortBy] = useState('best_match'); // how to sory results
   const [search, setSearch] = useState(false); // when to make api call 
   const [businesses, setBusinesses] = useState([]);
+  const [termSuggestions, setTermSuggestions] = useState([]);
+  const myRef = useRef(null);
   
   // KEYS are string text to display and VALUE is for the API
   const sortByOptions = {
@@ -27,17 +31,21 @@ export default function SearchBar() {
     }
 }
 
-/*const autocompleteTerm = async () => {
+const autocompleteTerm = async () => {
   try {
     let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
     let data = res.data;
     if (data.terms) {
-
+      setTermSuggestions(data.terms);
     }
   } catch(error) {
     console.error(error);
   }
-}*/
+}
+
+useEffect(() => {
+  autocompleteTerm();
+}, [term]);
 
 const searchBusinesses = async () => {
   try {
@@ -110,7 +118,7 @@ const searchBusinesses = async () => {
     //searchYelp(term, location, sortBy);
     setSearch(!search);
     e.preventDefault();
-
+    scrollToRef(myRef);
   }
 
   /**
@@ -137,61 +145,77 @@ const searchBusinesses = async () => {
 
   return (
       <div className='SearchBar'>
-        <h1>What's Here?</h1>
-        {/* 
-        the three buttons: best match, highest rated, most reviewed
-         as a list
-         */}
-        <div className='SearchBar-sort-options'>
-          <ul>
-            {renderSortByOptions()}
-          </ul>
-        </div>
-        <div className='SearchBar-fields'>
-          <input placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
-          <PlacesAutocomplete
-            onChange={handleLocationChange}
-            value={location}
-          >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                placeholder: 'Where?',
-                className: 'location-search-input',
-              })}
-            />
-            <div className="autocomplete-dropdown-container">
-              {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                  
-                const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="heading">
+          <h1>Where do you <span style={{color:"#59AFB9"}}>want to eat? </span></h1>
+          {/* 
+          the three buttons: best match, highest rated, most reviewed
+          as a list
+          */}
+          <div className='SearchBar-sort-options'>
+            <ul>
+              {renderSortByOptions()}
+            </ul>
           </div>
-        )}
-      </PlacesAutocomplete>
         </div>
+        <div className="fields">
+          <div className='SearchBar-fields'>
+            <div style={{marginTop:"-25px"}}>
+              <input placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
+              {termSuggestions.length > 1 && 
+               <div className="term-container">
+                {termSuggestions.map(term => {
+                  return (
+                    <div>
+                      <span>{term.text}</span>
+                    </div>
+                  );
+                })}
+              </div>}
+              </div>
+            <PlacesAutocomplete
+              onChange={handleLocationChange}
+              value={location}
+            >
+          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+            <div style={{marginTop:"-25px"}}>
+              <input
+                style={{height:"47px"}}
+                {...getInputProps({
+                  placeholder: 'Where?',
+                  className: 'location-search-input',
+                })}
+              />
+              <div className="autocomplete-dropdown-container">
+                {suggestions.map(suggestion => {
+                  const className = suggestion.active
+                    ? 'suggestion-item--active'
+                    : 'suggestion-item';
+                    
+                  const style = suggestion.active
+                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style,
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete>
         <div className='SearchBar-submit'>
-          <a href='#' onClick={handleSearch}>Let's Go</a>
+            <a href='#' onClick={handleSearch}>Let's Go</a>
+          </div>
+          </div>
         </div>
         {/* BusinessList is inhering the bussiness array/list to use */}
-        <BusinessList businesses={businesses}/>
+        <BusinessList businesses={businesses} myRef={myRef}/>
       </div>
     )
 }
