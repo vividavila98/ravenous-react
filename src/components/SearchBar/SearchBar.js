@@ -31,55 +31,54 @@ export default function SearchBar() {
     }
 }
 
-const autocompleteTerm = async () => {
-  try {
-    let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
-    let data = res.data;
-    if (data.terms) {
-      setTermSuggestions(data.terms);
-    }
-  } catch(error) {
-    console.error(error);
-  }
-}
-
 useEffect(() => {
+  const autocompleteTerm = async () => {
+    try {
+      let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
+      let data = res.data;
+      if (data.terms) {
+        setTermSuggestions(data.terms);
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  };
   autocompleteTerm();
 }, [term]);
 
-const searchBusinesses = async () => {
-  try {
-    let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, options);
-    let data = res.data;
-    if(data.businesses) {
-        // return an array that has all of the business properties
-        // we need: name, address, city, etc. 
-        const newArr = data.businesses.map(business => {
-            return {
-                id: business.id,
-                image: business.image_url,
-                name: business.name,
-                address: business.location.address1,
-                city: business.location.city,
-                state: business.location.state,
-                zipCode: business.location.zip_code,
-                category: business.categories.title,
-                rating: business.rating,
-                reviewCount: business.review_count,
-                website: business.url,
-                phone: business.display_phone,
-                photos: business.photos
-
-            };
-        });
-        setBusinesses(newArr);
-    }
-} catch(error) {
-    console.error(error);
-  }
-}
-
   useEffect(() => {
+    const searchBusinesses = async () => {
+      try {
+        let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, options);
+        let data = res.data;
+        if(data.businesses) {
+            // return an array that has all of the business properties
+            // we need: name, address, city, etc. 
+            const newArr = data.businesses.map(business => {
+                return {
+                    id: business.id,
+                    image: business.image_url,
+                    name: business.name,
+                    address: business.location.address1,
+                    city: business.location.city,
+                    state: business.location.state,
+                    zipCode: business.location.zip_code,
+                    category: business.categories.title,
+                    rating: business.rating,
+                    reviewCount: business.review_count,
+                    website: business.url,
+                    phone: business.display_phone,
+                    photos: business.photos
+    
+                };
+            });
+            setBusinesses(newArr);
+        }
+    } catch(error) {
+        console.error(error);
+      }
+    };
+
     searchBusinesses();
   }, [search]);
 
@@ -143,6 +142,8 @@ const searchBusinesses = async () => {
     });
   }
 
+  console.log(term);
+
   return (
       <div className='SearchBar'>
           <div className="heading">
@@ -159,14 +160,14 @@ const searchBusinesses = async () => {
         </div>
         <div className="fields">
           <div className='SearchBar-fields'>
-            <div style={{marginTop:"-25px"}}>
-              <input placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
+            <div className="input-box" style={{marginTop:"-25px"}}>
+              <input value={term} placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
               {termSuggestions.length > 1 && 
                <div className="term-container">
-                {termSuggestions.map(term => {
+                {termSuggestions.map(newTerm => {
                   return (
-                    <div>
-                      <span>{term.text}</span>
+                    <div className="suggestions" key={termSuggestions.indexOf(newTerm)}>
+                      <span onClick={() => setTerm(newTerm.text)}>{newTerm.text}</span>
                     </div>
                   );
                 })}
@@ -177,7 +178,7 @@ const searchBusinesses = async () => {
               value={location}
             >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div style={{marginTop:"-25px"}}>
+            <div className="input-box" style={{marginTop:"-25px"}}>
               <input
                 style={{height:"47px"}}
                 {...getInputProps({
@@ -210,7 +211,7 @@ const searchBusinesses = async () => {
           )}
         </PlacesAutocomplete>
         <div className='SearchBar-submit'>
-            <a href='#' onClick={handleSearch}>Let's Go</a>
+            <button href='#' onClick={handleSearch}>Let's Go</button>
           </div>
           </div>
         </div>

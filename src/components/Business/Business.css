@@ -24,7 +24,7 @@
 
   a.yelp-button {
     color: white;
-    background-color: #7F4378;
+    background-color: #59AFB9;
     padding: 5px 40px;
     border-radius: 4px;
   }
@@ -32,15 +32,15 @@
   a.yelp-button:hover {
     color: white;
     text-decoration: none;
-    background-color: #915089;
+    background-color: #41443B;
   }
 
   button.learn-more.btn.btn-secondary {
-    background-color: #7F4378;
+    background-color: #59AFB9;
   }
 
   button.learn-more.btn.btn-secondary:hover {
-    background-color: #915089;
+    background-color: #41443B;
   }
   
   .Business-information {

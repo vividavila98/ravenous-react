@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Link} from 'react-router-dom';
 import './Business.css';
 
 export default function Business(props) {
@@ -36,7 +35,7 @@ export default function Business(props) {
         <p>{business.phone}</p>
         </ModalBody>
         <ModalFooter>
-            <a href={business.website} target='_blank' className='yelp-button'>Yelp Info</a>
+            <a href={business.website} target='_blank' rel="noopener noreferrer" className='yelp-button'>Yelp Info</a>
         </ModalFooter>
       </Modal>
     </div>
