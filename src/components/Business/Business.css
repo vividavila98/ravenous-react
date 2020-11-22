@@ -1,81 +1,82 @@
 .Business {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 16.66rem;
-    margin: 0 .5rem 2.3rem .5rem;
-    border: 1px solid #dedede;
-    border-radius: 5px;
-  }
-  
-  .Business .image-container, .image-container {
-    height: 16.66rem;
-    margin: .5px .5px 1rem .5px;
-    border-radius: 5px;
-  }
-  
-  .Business h2 {
-    margin-bottom: .5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding-left: 20px;
-    color: #3C1E60;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 16.66rem;
+  margin: 0 0.5rem 2.3rem 0.5rem;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
 
-  a.yelp-button {
-    color: white;
-    background-color: #59AFB9;
-    padding: 5px 40px;
-    border-radius: 4px;
-  }
+.Business .image-container,
+.image-container {
+  height: 16.66rem;
+  margin: 0.5px 0.5px 1rem 0.5px;
+  border-radius: 5px;
+}
 
-  a.yelp-button:hover {
-    color: white;
-    text-decoration: none;
-    background-color: #41443B;
-  }
+.Business h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 20px;
+  color: #3c1e60;
+}
 
-  button.learn-more.btn.btn-secondary {
-    background-color: #59AFB9;
-  }
+a.yelp-button {
+  color: white;
+  background-color: #59afb9;
+  padding: 5px 40px;
+  border-radius: 4px;
+}
 
-  button.learn-more.btn.btn-secondary:hover {
-    background-color: #41443B;
-  }
-  
-  .Business-information {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-bottom: 20px;
-  }
-  
-  .Business-information p {
-    font-size: .88rem;
-    font-weight: 300;
-    line-height: 1rem;
-  }
-  
-  .Business-address {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .Business-reviews {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 5px;
-  }
-  
-  .Business-reviews h3 {
-    color: #E095B6;
-    font-weight: 600;
-  }
-  
-  .Business-reviews .rating {
-    font-size: .88rem;
-    line-height: 1rem;
-  }
-  
+a.yelp-button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #41443b;
+}
+
+button.learn-more.btn.btn-secondary {
+  background-color: #59afb9;
+  border: none;
+}
+
+button.learn-more.btn.btn-secondary:hover {
+  background-color: #41443b;
+}
+
+.Business-information {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.Business-information p {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1rem;
+}
+
+.Business-address {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Business-reviews {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.Business-reviews h3 {
+  color: #e095b6;
+  font-weight: 600;
+}
+
+.Business-reviews .rating {
+  font-size: 0.88rem;
+  line-height: 1rem;
+}

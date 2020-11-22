@@ -9,12 +9,12 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 
 export default function SearchBar() {
-  const [term, setTerm] = useState(''); // business term searched
-  const [location, setLocation] = useState(''); // location searched
-  const [sortBy, setSortBy] = useState('best_match'); // how to sory results
+  const [term, setTerm] = useState(' '); // business term searched
+  const [location, setLocation] = useState('Los Angeles, CA'); // location searched
+  const [sortBy, setSortBy] = useState('best_match'); // how to sort results
   const [search, setSearch] = useState(false); // when to make api call 
   const [businesses, setBusinesses] = useState([]);
-  const [termSuggestions, setTermSuggestions] = useState([]);
+  const [termSuggestions, setTermSuggestions] = useState([]); //array of term suggestions
   const myRef = useRef(null);
   
   // KEYS are string text to display and VALUE is for the API
@@ -32,6 +32,14 @@ export default function SearchBar() {
 }
 
 useEffect(() => {
+  if ("geolocation" in navigator) {
+      console.log("Available");
+    } else {
+      console.log("Not Available");
+    }
+});
+
+useEffect(() => {
   const autocompleteTerm = async () => {
     try {
       let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
@@ -44,7 +52,7 @@ useEffect(() => {
     }
   };
   autocompleteTerm();
-}, [term]);
+},[term]);
 
   useEffect(() => {
     const searchBusinesses = async () => {
@@ -142,8 +150,6 @@ useEffect(() => {
     });
   }
 
-  console.log(term);
-
   return (
       <div className='SearchBar'>
           <div className="heading">
@@ -177,7 +183,7 @@ useEffect(() => {
               onChange={handleLocationChange}
               value={location}
             >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => (
             <div className="input-box" style={{marginTop:"-25px"}}>
               <input
                 style={{height:"47px"}}
@@ -197,6 +203,7 @@ useEffect(() => {
                     : { backgroundColor: '#ffffff', cursor: 'pointer' };
                   return (
                     <div
+                      key={suggestions.indexOf(suggestion)}
                       {...getSuggestionItemProps(suggestion, {
                         className,
                         style,
