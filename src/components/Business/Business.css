@@ -20,7 +20,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   padding-left: 20px;
-  color: #3c1e60;
+  color: #000;
 }
 
 a.yelp-button {
@@ -72,7 +72,7 @@ button.learn-more.btn.btn-secondary:hover {
 }
 
 .Business-reviews h3 {
-  color: #e095b6;
+  color: #59afb9;
   font-weight: 600;
 }
 

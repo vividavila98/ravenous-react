@@ -31,18 +31,18 @@ export default function SearchBar() {
     }
 }
 
-useEffect(() => {
-  if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
-});
+// useEffect(() => {
+//   if ("geolocation" in navigator) {
+//       console.log("Available");
+//     } else {
+//       console.log("Not Available");
+//     }
+// });
 
 useEffect(() => {
   const autocompleteTerm = async () => {
     try {
-      let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
+      let res = await Axios.get(`https://obscure-oasis-27229.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${term}&latitude=37.0902&longitude=95.7129`, options);
       let data = res.data;
       if (data.terms) {
         setTermSuggestions(data.terms);
@@ -57,7 +57,7 @@ useEffect(() => {
   useEffect(() => {
     const searchBusinesses = async () => {
       try {
-        let res = await Axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, options);
+        let res = await Axios.get(`https://obscure-oasis-27229.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, options);
         let data = res.data;
         if(data.businesses) {
             // return an array that has all of the business properties

@@ -10,7 +10,7 @@
     "react-places-autocomplete": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.1.0",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.2.0",
     "reactstrap": "^8.4.1"
   },
   "scripts": {
