@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Axios from "axios";
 import {YELP_API_KEY} from '../../constants';
 import './InputTerm.css';

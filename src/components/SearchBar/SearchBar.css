@@ -55,11 +55,6 @@
   margin-right: 0;
 }
 
-.suggestions:hover {
-  cursor: pointer;
-  background-color: lightgray;
-}
-
 .SearchBar-submit {
   text-align: center;
   margin-top: -11px;

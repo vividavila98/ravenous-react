@@ -1,7 +1,24 @@
 .term-container {
   background-color: #fff;
   color: #000;
-  width: 16em;
+  width: 21em;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.suggestions {
+  padding: 5px;
+}
+
+.suggestions:hover {
+  cursor: pointer;
+  background-color: #efeff0;
+  }
+
+@media only screen and (max-width: 992px) {
+  .term-container {
+    width: 16em;
+  }
 }
 
 @media only screen and (max-width: 768px) {  
