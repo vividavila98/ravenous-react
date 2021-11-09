@@ -1,167 +1,112 @@
-/*.SearchBar {
-    display: flex;
-    flex-direction: column;
-    /*background-image: url('../../assets/skyscraper.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 35rem;
-  }*/
+.SearchBar .heading {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .SearchBar .heading {
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.fields {
+  background-image: url('../../assets/morning.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+}
 
-  .fields {
-    background-image: url('../../assets/morning.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 50vh;
-  }
-  
-  .SearchBar-sort-options ul {
-    padding: 2rem 0;
-    display: flex;
-    justify-content: center;
-    color: #000;
-  }
-  
-  .SearchBar-sort-options li {
-    cursor: pointer;
-    width: 10.33rem;
-    border-bottom: 1px solid #B07955;
-    padding: 0 2.58rem .33rem 2.58rem;
-    line-height: 1.13;
-    text-align: center;
-    font-weight: 600;
-    font-size: .83rem;
-    color: #B07955;
-    transition: color .25s;
-  }
+.search-business {
+  height: 47px;
+}
 
-  .search-business {
-    height: 47px;
-  }
+.SearchBar-fields {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 3rem;
+}
 
-  .SearchBar-sort-options li:hover {
-    color: #d4cfcf;
+.suggestion-item {
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.suggestion-item--active:hover {
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.SearchBar-fields input {
+  width: 21rem;
+  padding: .66rem 1rem;
+  margin-right: 2.22rem;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  font-size: .77rem;
+  font-weight: 500;
+}
+
+.SearchBar-fields input:last-child {
+  margin-right: 0;
+}
+
+.suggestions:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.SearchBar-submit {
+  text-align: center;
+  margin-top: -11px;
+}
+
+.SearchBar-submit button {
+  border: none;
+  border-radius: 4px;
+  padding: .72rem 1.7rem;
+  background-color: #41443B;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color .5s;
+}
+
+.SearchBar-submit a:hover {
+  cursor: pointer;
+  background-color: #92BEC0;
+  color: white;
+  text-decoration: none;
+}
+
+
+h1 {
+  padding: 2rem 0;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #41443B;
+}
+
+@media only screen and (max-width: 992px) {
+  .SearchBar-fields input {
+    width: 16rem;
   }
-  
-  .SearchBar-sort-options li.active,
-  .SearchBar-sort-options li.active:hover {
-    border-bottom: 1px solid #000;
-    color: #000;
-  }
-  
+}
+
+
+@media only screen and (max-width: 768px) {  
   .SearchBar-fields {
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 3rem;
-  }
-
-  .suggestion-item {
-    color: black;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  .suggestion-item--active:hover {
-    color: black;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-    font-size: 12px;
-    padding: 10px;
+    flex-direction: column;
+    align-items: center;
   }
 
   .SearchBar-fields input {
-    width: 21rem;
-    padding: .66rem 1rem;
-    margin-right: 2.22rem;
-    border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 4px;
-    font-size: .77rem;
-    font-weight: 500;
-  }
-  
-  .SearchBar-fields input:last-child {
     margin-right: 0;
   }
-  
-  .suggestions:hover {
-    cursor: pointer;
-    background-color: lightgray;
-  }
-
-  .SearchBar-submit {
-    text-align: center;
-    margin-top: -11px;
-  }
-  
-  .SearchBar-submit button {
-    border: none;
-    border-radius: 4px;
-    padding: .72rem 1.7rem;
-    background-color: #41443B;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color .5s;
-  }
-
-  .term-container {
-    background-color: #fff;
-    color: #000;
-    width: 90%;
-  }
-  
-  .SearchBar-submit a:hover {
-    cursor: pointer;
-    background-color: #92BEC0;
-    color: white;
-    text-decoration: none;
-  }
-  
-
-  h1 {
-    padding: 2rem 0;
-    text-align: center;
-    font-family: Poppins, sans-serif;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #41443B;
-  }
-
-  @media only screen and (max-width: 992px) {
-    .SearchBar-fields input {
-      width: 16rem;
-    }
-  }
-
-  
-  @media only screen and (max-width: 768px) {  
-    .SearchBar-sort-options ul {
-      margin-left: 2rem;
-      margin-right: 2rem;
-    }
-  
-    .SearchBar-fields {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .SearchBar-fields input {
-      margin-right: 0;
-    }
-
-    div.input-box {
-      margin-bottom: 5rem;
-    }
-  }
-  
+}

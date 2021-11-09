@@ -1,0 +1,11 @@
+.term-container {
+  background-color: #fff;
+  color: #000;
+  width: 16em;
+}
+
+@media only screen and (max-width: 768px) {  
+  div.input-box {
+    margin-bottom: 5rem;
+  }
+}

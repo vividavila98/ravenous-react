@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './SearchBar.css';
-import BusinessList from '../BusinessList/BusinessList.js';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import Axios from "axios";
 import {YELP_API_KEY} from '../../constants';
+import './SearchBar.css';
+import BusinessList from '../BusinessList/BusinessList.js';
+import SortList from '../SortList/SortList';
+import InputTerm from "../InputTerm/InputTerm";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -16,20 +18,12 @@ export default function SearchBar() {
   const [businesses, setBusinesses] = useState([]);
   const [termSuggestions, setTermSuggestions] = useState([]); //array of term suggestions
   const myRef = useRef(null);
-  
-  // KEYS are string text to display and VALUE is for the API
-  const sortByOptions = {
-    'Best Match': 'best_match',
-    'Highest Rated': 'rating',
-    'Most Reviewed': 'review_count'
-  };
 
   const options = {
     headers: { 
-        Authorization: `Bearer ${YELP_API_KEY}`
-
+      Authorization: `Bearer ${YELP_API_KEY}`
     }
-}
+  }
 
 // useEffect(() => {
 //   if ("geolocation" in navigator) {
@@ -90,23 +84,6 @@ useEffect(() => {
     searchBusinesses();
   }, [search]);
 
-  // returns the current CSS class for a sorting option: either it's active
-  // or it's nothing. 
-  const getSortByClass = sortByOption => {
-    // if the sortByOption is the same as the state value, 
-    //then it's being used so it's 'active'
-    if (sortBy === sortByOption) {
-      return 'active';
-    }
-    else {
-      return '';
-    }
-  }
-
-  // sets the state of sortBy to the parameter sortByOption
-  const handleSortByChange = sortByOption => {
-    setSortBy(sortByOption);
-  }
 
   // this is going to be triggered when something is typed into business text field
   // what is passed in is an event OBJECT, and what is typed is extracted from this
@@ -128,57 +105,15 @@ useEffect(() => {
     scrollToRef(myRef);
   }
 
-  /**
-   * Purpose: dynamically creates the list items needed to
-   * display the sort options 
-   * Iterate through the keys and values of object sortByOptions and
-   * return a list item
-   */
-  const renderSortByOptions = () => {
-    // keys() method is to access the KEYS
-    // iterate through the KEYS as an array using the map() method
-    return Object.keys(sortByOptions).map(sortByOption => {
-      // now in the map() method, it's storing the VALUE of each KEY 
-      // in a variable sortByOptionValue as an array
-      // sortByOptions[sortByOption] = VALUE of KEY
-      // sortByOptionValue = ['best_match', 'rating', 'review_count']
-      let sortByOptionValue = sortByOptions[sortByOption];
-      // return the array of KEYS as a list with the VALUES are the unique ID/key
-      // returns list Best Match Highest Rated Most Reviewed
-      // onClick is wrapped with an arrow function bc it's an event handler
-      return <li className={getSortByClass(sortByOptionValue)} onClick={() => handleSortByChange(sortByOptionValue)} key={sortByOptionValue}>{sortByOption}</li>
-    });
-  }
-
   return (
       <div className='SearchBar'>
-          <div className="heading">
+        <div className="heading">
           <h1>Where do you <span style={{color:"#59AFB9"}}>want to eat? </span></h1>
-          {/* 
-          the three buttons: best match, highest rated, most reviewed
-          as a list
-          */}
-          <div className='SearchBar-sort-options'>
-            <ul>
-              {renderSortByOptions()}
-            </ul>
-          </div>
+          <SortList />
         </div>
         <div className="fields">
           <div className='SearchBar-fields'>
-            <div className="input-box" style={{marginTop:"-25px"}}>
-              <input value={term} placeholder='Search Businesses' className='search-business' onChange={handleTermChange}/>
-              {termSuggestions.length > 1 && 
-               <div className="term-container">
-                {termSuggestions.map(newTerm => {
-                  return (
-                    <div className="suggestions" key={termSuggestions.indexOf(newTerm)}>
-                      <span onClick={() => setTerm(newTerm.text)}>{newTerm.text}</span>
-                    </div>
-                  );
-                })}
-              </div>}
-              </div>
+            <InputTerm />
             <PlacesAutocomplete
               onChange={handleLocationChange}
               value={location}

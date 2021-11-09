@@ -1,0 +1,40 @@
+.SearchBar-sort-options {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  color: #000;
+}
+  
+.SearchBar-sort-options button {
+  cursor: pointer;
+  width: 10.33rem;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #B07955;
+  padding: 0 2.58rem .33rem 2.58rem;
+  line-height: 1.13;
+  text-align: center;
+  font-weight: 600;
+  font-size: .83rem;
+  color: #B07955;
+  transition: color .25s;
+}
+
+.SearchBar-sort-options button:hover {
+  color: #d4cfcf;
+  outline: none;
+}
+  
+.SearchBar-sort-options button.active,
+.SearchBar-sort-options button.active:hover {
+  border-bottom: 1px solid #000;
+  color: #000;
+  outline: none;
+}
+
+@media only screen and (max-width: 768px) {  
+  .SearchBar-sort-options {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
