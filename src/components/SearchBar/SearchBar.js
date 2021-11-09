@@ -73,8 +73,6 @@ export default function SearchBar() {
           <h1>Where do you <span style={{color:"#59AFB9"}}>want to eat? </span></h1>
           <SortList />
         </header>
-
-        <div className="fields">
           <div className='SearchBar-fields'>
             <InputTerm />
             <InputLocation />
@@ -82,7 +80,6 @@ export default function SearchBar() {
               <button href='#' onClick={handleSearch}>Let's Go</button>
             </div>
           </div>
-        </div>
         <BusinessList businesses={businesses} myRef={myRef}/>
       </div>
     )

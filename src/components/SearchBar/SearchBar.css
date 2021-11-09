@@ -5,12 +5,12 @@
   justify-content: center;
 }
 
-.fields {
+/* .fields {
   background-image: url('../../assets/morning.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 50vh;
-}
+} */
 
 .search-business {
   height: 47px;
@@ -20,6 +20,10 @@
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 3rem;
+  background-image: url('../../assets/morning.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
 }
 
 .suggestion-item {
