@@ -28,7 +28,7 @@
     "set-value": "^4.1.0",
     "sockjs": "^0.3.21",
     "ssri": "^8.0.1",
-    "url-parse": "^1.5.3"
+    "url-parse": "^1.5.9"
   },
   "scripts": {
     "start": "react-scripts start",
